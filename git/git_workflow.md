@@ -21,7 +21,7 @@ hotfix/data-latency
 ### 标签命名：
 prod-2025-07-04       # 某次实盘上线版本
 backtest-alpha001     # 某次回测策略快照
-v1.2.3                # 用于特定版本发布记录（可选）
+v1.2.3                # 用于特定版本发布记录(可选)
 
 ## 3. 开发流程
 
@@ -29,15 +29,54 @@ v1.2.3                # 用于特定版本发布记录（可选）
 
 ```bash
 # 创建分支
-git checkout -b strategy/mean-reversion
+git checkout -b feature/observe
 
 # 正常开发,提交
 git add .
 git commit -m "add mean reversion strategy"
 
-# 合并到 develop 做统一回测
-git checkout develop
-git merge strategy/mean-reversion
+
+#git merge 操作步骤(保守安全派,多人协作、需要保留真实历史)
+
+# 切换到 dev 分支
+git checkout dev
+# 拉取远程最新的 dev
+git pull origin dev
+# 合并 feature 分支(会生成一个 merge commit)
+git merge --squash feature/observe
+# 推送 dev
+git push origin dev
+
+#git rebase 操作步骤(整洁线性派)
+
+#查看有多少提交是相对于 dev 的
+git log dev..HEAD --oneline
+
+# 确保在 feature 分支
+git checkout feature/observe
+
+# 拉取并切回最新 dev
+git fetch origin
+git checkout dev
+git pull origin dev
+git checkout feature/observe
+
+# 执行 rebase
+git rebase dev
+
+# 修改冲突文件
+git add <冲突文件>
+git rebase --continue
+
+#开始交互式 rebase 并 squash 提交
+git rebase -i dev
+git push origin feature/observe --force
+
+#编辑最终的提交信息
+# 删除远程分支
+git push origin --delete feature/observe
+# 删除本地分支
+git branch -d feature/observe
 ```
 
 
