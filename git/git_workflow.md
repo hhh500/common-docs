@@ -44,6 +44,8 @@ git checkout dev
 git pull origin dev
 # 合并 feature 分支(会生成一个 merge commit)
 git merge --squash feature/observe
+
+git commit -m "多品种行情数据存档可用"
 # 推送 dev
 git push origin dev
 
