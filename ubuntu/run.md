@@ -11,3 +11,8 @@ nohup go run cmd/save/bookTickerMulti/bn/main.go > bookTick.log 2>&1 &
 tail -f bookTick.log
 
 nohup go  run cmd/save/linuxServer/main.go > linuxServer.log 2>&1 &
+
+
+aws
+nohup ./scripts/myserver-bookTickBn > ./logs/bookTickBn.log 2>&1 &
+nohup ./scripts/myserver-linuxServer > ./logs/linuxServer.log 2>&1 &
