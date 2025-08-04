@@ -1,5 +1,5 @@
 ## 添加子模块，放入 doc/ 目录
-git submodule add git@github.com:your-org/common-docs.git doc
+git submodule add https://github.com/hhh500/common-docs.git doc
 
 ## 修改并提交 common-docs 的内容(子模块的 Git 操作和普通仓库一样)
 cd doc
